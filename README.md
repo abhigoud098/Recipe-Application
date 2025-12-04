@@ -40,7 +40,6 @@ Fallback Suggestions: If a search yields no results, buttons suggest external re
 ✨ Smooth animations using GSAP or Framer Motion
 
 🧑‍💻 Author
-
 👋 Abhishek Goud
 Full-Stack Developer | Electronics Engineer | Tech Enthusiast
 
