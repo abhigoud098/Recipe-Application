@@ -1,224 +1,195 @@
-const meals = document.getElementById("meals");
-const favoriteContainer = document.getElementById("fev-meals");
-const searchTerm = document.getElementById("search-Term");
+const mealsContainer = document.getElementById("meals");
+const popularContainer = document.getElementById("popular-meals");
+const favoriteContainer = document.getElementById("fav-meals");
+const searchTerm = document.getElementById("search-term");
 const searchBtn = document.getElementById("search");
+const modalContainer = document.getElementById("meal-info-container");
+const modalContent = document.querySelector(".meal-details-content");
 
+let allRecipes = [];
 
-getRandomMeal();
-fetchFavMeals();
+// 🔹 Initialize app
+init();
 
-//Get random meal in page.
-async function getRandomMeal() {
-  const resPo = await fetch("https://dummyjson.com/recipes");
-  const data = await resPo.json();
-  const randomNumber = Math.floor(Math.random() * 31); 
-  const randomMeal = data.recipes[randomNumber];
-  //   .then(res => res.json())
-  // .then(console.log);
+async function init() {
+  const res = await fetch("https://dummyjson.com/recipes");
+  const data = await res.json();
+  allRecipes = data.recipes;
 
-  addMeal(randomMeal, true); //Send data addMeals for showing
+  getRandomMeal();
+  getPopularMeals();
+  fetchFavMeals();
 }
 
-//Get the meal by Id
-async function getMealById(id) {
-  // Here a id is in argument is userId
-
-  const resPo = await fetch("https://dummyjson.com/recipes");
-  const wholeData = await resPo.json();
-  let lengthOfData = wholeData.recipes.length;
-
-  for (let i = 0; i <= lengthOfData; i++) {
-    let arrOfRecipe = wholeData.recipes[i];
-    if (arrOfRecipe.userId === id) {
-      return wholeData.recipes[i];
-    }
-  }
+/* 🧩 Random recipe */
+function getRandomMeal() {
+  const random = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+  mealsContainer.innerHTML = "";
+  addMeal(random, mealsContainer);
 }
 
-//Get meals by searching
-async function getMealsBySearch(term) {
-  const meals = await fetch(`https://dummyjson.com/recipes/search?q=${term}`);
-  let dataOfSearch = await meals.json();
-  const item = dataOfSearch;
-  return item;
-  // console.log(meals);
+/* 🔥 Popular (top 6) */
+function getPopularMeals() {
+  const topRecipes = allRecipes.slice(0, 6);
+  popularContainer.innerHTML = "";
+  topRecipes.forEach((r) => addMeal(r, popularContainer));
 }
 
-//Add meals 
-function addMeal(mealData, random = false) {
+/* 🍽️ Add meal card */
+function addMeal(mealData, container) {
+  const meal = document.createElement("div");
+  meal.classList.add("meal");
+  meal.innerHTML = `
+    <img src="${mealData.image}" alt="${mealData.name}" />
+    <div class="meal-body">
+      <h4>${mealData.name}</h4>
+      <button class="fav-btn"><i class="fa-solid fa-heart"></i></button>
+    </div>`;
 
-  //If meal are not present 
-  if (mealData === "") {
-    const meal = document.createElement("div"); 
-    meal.classList.add("meal"); 
-    meals.innerHTML = `
-            <div class="meals-header">
-             ${random ? `<span class="random"> Random Recipe </span>` : ""}
-             <img
-              src="https://cdni.iconscout.com/illustration/premium/thumb/cook-said-oops-no-food-available-illustration-download-in-svg-png-gif-file-formats--online-ordering-service-and-delivery-pack-e-commerce-shopping-illustrations-1784257.png"
-              alt=""
-            />
-            </div>
-            <div class="meal-body">
-              <h4>Sorry 🤔</h4>
-            </div>
-          `;
-  }
+  const btn = meal.querySelector(".fav-btn");
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("active");
+    if (btn.classList.contains("active")) addMealLS(mealData.id);
+    else removeMealLS(mealData.id);
+    fetchFavMeals();
+  });
 
-  //If meal is present
-   else {
-    const meal = document.createElement("div"); 
-    meal.classList.add("meal"); 
-    meals.innerHTML = `
-          <div class="meals-header">
-           ${random ? `<span class="random"> ${mealData.name} </span>` : ""}
-            <img
-              src="${mealData.image}"
-              alt=""
-            />
-          </div>
-          <div class="meal-body">
-            <h4>${mealData.cuisine}</h4>
-            <button class="fav-btn"><i class="fa-solid fa-heart"></i></button>
-          </div>
-        `;
-
-    const btn = document.querySelector(".meal-body .fav-btn");
-
-    //Remove meal or add meal
-    btn.addEventListener("click", () => {
-      if (btn.classList.contains("active")) {
-        removeMealLS(mealData.userId);
-        btn.classList.remove("active");
-      } else {
-        addMealLS(mealData.userId);
-        btn.classList.add("active");
-        getRandomMeal();
-      }
-      //clear the container
-      fetchFavMeals();
-    });
-    //Add meal in fav container
-    meals.appendChild(meal);
-  }
+  meal.addEventListener("click", () => showMealPopup(mealData));
+  container.appendChild(meal);
 }
 
-//Add meal in Local Storage
-function addMealLS(userId) {
-  const userIds = getMealLS();
-
-  localStorage.setItem("userIds", JSON.stringify([...userIds, userId]));
+/* ❤️ Favorites LocalStorage */
+function addMealLS(id) {
+  const ids = getMealLS();
+  localStorage.setItem("mealIds", JSON.stringify([...ids, id]));
 }
-
-//Remove meal in local storage
-function removeMealLS(userId) {
-  const userIds = getMealLS();
-  localStorage.setItem(
-    "userIds",
-    JSON.stringify(userIds.filter((id) => id !== userId))
-  );
+function removeMealLS(id) {
+  const ids = getMealLS();
+  localStorage.setItem("mealIds", JSON.stringify(ids.filter((i) => i !== id)));
 }
-
-//Get meal in local storage
 function getMealLS() {
-  const userIds = JSON.parse(localStorage.getItem("userIds"));
-
-  return userIds === null ? [] : userIds;
+  const ids = JSON.parse(localStorage.getItem("mealIds"));
+  return ids ? ids : [];
 }
 
-async function fetchFavMeals() {
+/* 🧡 Fetch Favorites */
+function fetchFavMeals() {
   favoriteContainer.innerHTML = "";
-  const mealsIds = getMealLS();
+  const ids = getMealLS();
 
-  for (let i = 0; i < mealsIds.length; i++) {
-    const mealsId = mealsIds[i];
-    let meal = await getMealById(mealsId);
-    addMealToFav(meal);
-  }
+  ids.forEach((id) => {
+    const favMeal = allRecipes.find((m) => m.id === id);
+    if (favMeal) addMealToFav(favMeal);
+  });
+
+  if (ids.length === 0)
+    favoriteContainer.innerHTML = "<p>No favorites added yet ❤️</p>";
 }
 
-//Add them to the screen
 function addMealToFav(mealData) {
-  const favMeal = document.createElement("li"); //Here create a element li
-
-  favMeal.innerHTML = `
-          <li onclick="useridOfLi(${mealData.userId})">
-            <img
-              src="${mealData.image}"
-              alt="${mealData.name}"
-            /><span>${mealData.name}</span>
-          </li>
-        `;
-
-  favoriteContainer.appendChild(favMeal);
-
-  //Show recipes in details.
-  favMeal.addEventListener("click", showRecipesOfFavMeals);
+  const li = document.createElement("li");
+  li.innerHTML = `<img src="${mealData.image}" alt="${mealData.name}" />
+  <span>${mealData.name}</span>`;
+  li.addEventListener("click", () => showMealPopup(mealData));
+  favoriteContainer.appendChild(li);
 }
 
-// Function to show recipes details based on fetched data
-function showRecipesOfFavMeals(favMealsInLi) {
-  const showRecipes = document.querySelector(".detailsOfMeal");
-  showRecipes.style.display = "block";
+/* 📖 Modal Popup */
+function showMealPopup(meal) {
+  modalContainer.style.display = "flex";
+  modalContent.innerHTML = `
+    <h2>${meal.name}</h2>
+    <img src="${meal.image}" alt="${meal.name}" />
+    <p><strong>Cooking Time:</strong> ${meal.cookTimeMinutes} min</p>
+    <p><strong>Ingredients:</strong> ${meal.ingredients.join(", ")}</p>
+    <p><strong>Instructions:</strong> ${meal.instructions}</p>`;
+}
 
-  // Check if the div already exists and remove it
-  const existingRecipe = showRecipes.querySelector(".recipesOfMeals");
-  if (existingRecipe) {
-    existingRecipe.remove(); // Remove the previous div if it exists
+document
+  .getElementById("close-popup")
+  .addEventListener("click", () => (modalContainer.style.display = "none"));
+
+/* 🔍 Smart Search + Refresh When Empty */
+function fuzzyMatch(str, query) {
+  str = str.toLowerCase();
+  query = query.toLowerCase();
+  let lastIndex = -1;
+  for (let char of query) {
+    lastIndex = str.indexOf(char, lastIndex + 1);
+    if (lastIndex === -1) return false;
   }
+  return true;
+}
 
-  // Create the new recipe details div
-  const detailsDiv = document.createElement("div");
-  detailsDiv.classList.add("recipesOfMeals");
-
-  // Ensure favMealsInLi contains the necessary properties
-  detailsDiv.innerHTML = `
-    <button class="clear"><i class="fa-solid fa-xmark"></i></button>
-    <h1>HOW YOU MADE IT?</h1>
-    <p>Name: <span>${favMealsInLi.name}</span></p>
-    <p>Cooking Time: <span>${favMealsInLi.cookTimeMinutes}</span> min</p>
-    <p>Ingredients: <span>${favMealsInLi.ingredients}</span></p>
-    <p>Instructions: <span>${favMealsInLi.instructions}</span></p>
-    <button class="remove"><span>Remove</span></button>
+/* 🔗 Related Websites — shown as buttons with icons + retry */
+function showRelatedLinks(term) {
+  mealsContainer.innerHTML = `
+    <div class="no-results">
+      <p>No recipes found for "<b>${term}</b>" 😕</p>
+      </div>
+      <button id="try-again-btn" class="try-again-btn">🔄 Try Again</button>
+    </div>
   `;
 
-  //Remove Your Fav meal
-  const btn = detailsDiv.querySelector(".remove");
-
-  btn.addEventListener("click", () => {
-    removeMealLS(favMealsInLi.userId);
-    fetchFavMeals();
-    showRecipes.style.display = "none";
+  // 🔁 "Try Again" button refreshes to show random & popular recipes again
+  const tryAgainBtn = document.getElementById("try-again-btn");
+  tryAgainBtn.addEventListener("click", () => {
+    mealsContainer.innerHTML = "";
+    getRandomMeal();
+    getPopularMeals();
   });
-
-  // Add close button functionality
-  const closeButton = detailsDiv.querySelector(".clear");
-  closeButton.addEventListener("click", () => {
-    showRecipes.style.display = "none"; // Hide the details div
-  });
-
-  // Append the details div to the .detailsOfMeal container
-  showRecipes.appendChild(detailsDiv);
 }
 
-//Function for get fav meal userid for show the recipes of meals 
-async function useridOfLi(uId) {
-  const liInFavMeals = await getMealById(uId);
-  return showRecipesOfFavMeals(liInFavMeals);
-}
+/* 🎯 Filter and show matches */
+function searchRecipes(term) {
+  const results = allRecipes.filter(
+    (r) =>
+      r.name.toLowerCase().includes(term.toLowerCase()) ||
+      fuzzyMatch(r.name, term)
+  );
 
-//Search meal by click button
-searchBtn.addEventListener("click", async () => {
-  const search = searchTerm.value;
-  const searchMeal = await getMealsBySearch(search);
-  const recipeOfMeals = searchMeal.recipes;
-
-  if (recipeOfMeals.length === 0) {
-    addMeal("");
+  mealsContainer.innerHTML = "";
+  if (results.length === 0) {
+    showRelatedLinks(term);
   } else {
-    recipeOfMeals.forEach((meal) => {
-      addMeal(meal);
-      searchTerm.value = "";
-    });
+    results.forEach((m) => addMeal(m, mealsContainer));
+  }
+}
+
+/* 🖱️ Search Button Click */
+searchBtn.addEventListener("click", () => {
+  const term = searchTerm.value.trim();
+
+  // 🔄 If empty → refresh homepage
+  if (!term) {
+    mealsContainer.innerHTML = "";
+    getRandomMeal();
+    getPopularMeals();
+    return;
+  }
+
+  searchRecipes(term);
+});
+
+/* ⌨️ Live Typing (real-time search) */
+searchTerm.addEventListener("input", (e) => {
+  const term = e.target.value.trim();
+
+  // 🔄 If cleared → refresh homepage
+  if (term === "") {
+    mealsContainer.innerHTML = "";
+    getRandomMeal();
+    getPopularMeals();
+    return;
+  }
+
+  if (term.length >= 2) searchRecipes(term);
+});
+
+/* ↩️ Enter Key */
+searchTerm.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchBtn.click();
   }
 });

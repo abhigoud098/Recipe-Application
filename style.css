@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Text:ital@0;1&family=Oswald:wght@200..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Text:ital@0;1&family=Dancing+Script:wght@400..700&family=Oswald:wght@200..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Text:ital@0;1&family=Dancing+Script:wght@400..700&family=Liter&family=Oswald:wght@200..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
@@ -9,272 +7,254 @@
 }
 
 body {
-  background: #ece9e6;
-  background: -webkit-linear-gradient(to right, #ffffff, #ece9e6);
-  background: linear-gradient(to right, #ffffff, #ece9e6);
-  font-family: "Bebas Neue", serif;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 0.1rem;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #fffaf4;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  overflow-x: hidden;
 }
 
-.mobile-container {
-  box-shadow: 0 0 10px 2px #3333331a;
-  border-radius: 3px;
-  overflow: hidden;
-  width: 400px;
-  background-color: #ffffff;
-  position: relative;
-  text-transform: none;
-}
-
-img {
-  max-width: 100%;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-header input {
-  background-color: #ece9e6;
-  border: 2pz solid black;
-  border-radius: 3px;
-  padding: 0.3rem 0.3rem;
-  font-family: inherit;
-  width: 15rem;
-  height: 3rem;
-}
-
-header button {
-  background-color: transparent;
-  border: none;
-  font-size: 1.5rem;
-  margin-left: 10px;
-  color: black;
-}
-
-.fav-container {
-  padding: 1rem;
-  text-align: center;
-  /* background-color: rgb(243, 235, 248); */
-  overflow: hidden;
+/* Navbar */
+.navbar {
   background-color: #f7eedd;
-}
-
-.fav-meals {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-  white-space: nowrap;
-  overflow-x: auto;
-  display: flex;
-}
-
-.fav-meals::-webkit-scrollbar {
-  display: none;
-}
-
-.fav-meals li {
-  width: 85px;
-  display: inline-block;
-  flex: 0 0 auto;
-  align-items: center;
-  position: relative;
-}
-
-.fav-meals li .clear{
-  background-color: transparent;
-  position: absolute;
-  top: 0rem;
-  right: 0.5rem;
-  border: none;
-  font-size: 1.2rem;
-  opacity: 0;
-  color: red;
-  cursor: pointer;
-}
-
-.fav-meals li img {
-  border-radius: 50%;
-  object-fit: cover;
-  height: 70px;
-  width: 70px;
-  border: 2px solid coral;
-  box-shadow: 0 0 10px 2px #3333331a;
-  display: block;
-}
-
-.fav-meals li:hover{
-  cursor: pointer;
-}
-
-.fav-container h3 {
-  font-weight: 200;
-  padding-bottom: 1.5rem;
-}
-
-h3{
-  color: coral;
-}
-
-.fav-meals li span {
-  font-size: 0.8rem;
-  position: relative;
-  right: 0.2rem;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 75px;
-  color: coral;
-  font-weight: 600;
-}
-
-.meal {
-  margin: 10px;
-  box-shadow: 0 0 10px 2px #3333331a;
-  border-radius: 3px;
-  margin: 1.5rem;
-  /* background-color: rgb(243, 235, 248); */
-  background-color: #fff;
-  overflow: hidden;
-  background: #f7f9ff;
-}
-
-.meals-header .random {
-  position: relative;
-  top: 1rem;
-  background-color: #ffffff;
-  padding: 0.25rem 1rem;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-
-.meals-header img {
-  position: relative;
-  top: 1rem;
-  height: 250px;
-  width: 100%;
-  object-fit: cover;
-  padding: 0.25rem 1rem;
-}
-
-.meal-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1rem 3rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #ffe5c4;
 }
 
-.meal-body h4 {
-  margin: 0;
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: coral;
+}
+.logo span {
+  color: #ff6347;
 }
 
-.meal-body .fav-btn {
-  background-color: transparent;
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: coral;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.search-bar input {
+  padding: 0.4rem 0.7rem;
+  border: 2px solid coral;
+  border-radius: 6px;
+  outline: none;
+}
+.search-bar button {
+  background-color: coral;
+  color: #fff;
   border: none;
-  font-size: 1.2rem;
-  color: #455583;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
   cursor: pointer;
+  transition: 0.3s;
+}
+.search-bar button:hover {
+  background-color: #ff8243;
 }
 
-.meal-body .fav-btn.active {
-  color: red;
+/* Section */
+.section {
+  padding: 3rem 10%;
+  text-align: center;
+}
+.section h2 {
+  color: coral;
+  margin-bottom: 1.5rem;
 }
 
-h4{
-  font-weight: 200;
-  font-size: 1.2rem;
+.try-again-btn {
+  background-color: coral;
+  border: 2px solid coral;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.detailsOfMeal {
-  position: absolute;
-  top: 20%;
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 370px; 
-  max-height: 440px; 
-  background-color: #f7eedd;
-  padding: 20px; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  z-index: 1000; 
-  display: none;
-  overflow-y: auto;
+.try-again-btn:hover {
+  background-color: #ff9a68;
+  color: white;
+  transform: translateY(-2px);
 }
 
-.detailsOfMeal::-webkit-scrollbar{
-  display: none;
+/* Meals Grid */
+.meals,
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
-
-.recipesOfMeals .clear {
+.meal {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.meal:hover {
+  transform: translateY(-5px);
+}
+.meal img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.meal-body {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.meal-body h4 {
+  color: #333;
+  font-size: 1rem;
+}
+.fav-btn {
   background: transparent;
   border: none;
-  font-size: 1.5rem;
-  color: #333;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  font-size: 1.3rem;
   cursor: pointer;
-  transition: color 0.3s ease;
+  color: #999;
 }
-
-.recipesOfMeals h1 {
+.fav-btn.active,
+.fav-btn:hover {
   color: coral;
-  font-weight: 200;
-  margin-bottom: 10px;
-  font-size: 1.5rem; 
 }
 
-.recipesOfMeals p {
-  line-height: 1.5rem;
-  margin-bottom: 10px;
+/* Favorite Meals */
+.fav-section {
+  background-color: #fff7ed;
 }
-
-.detailsOfMeal .recipesOfMeals {
+.fav-meals {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  overflow-x: auto;
   padding: 1rem;
 }
-
-.detailsOfMeal .recipesOfMeals p {
-  font-size: 1rem;
-  color: #555;
+.fav-meals li {
+  text-align: center;
+}
+.fav-meals img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid coral;
+  object-fit: cover;
 }
 
-.detailsOfMeal .recipesOfMeals p{
+/* Contact */
+.contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border: 1.5px solid coral;
+  border-radius: 6px;
+  outline: none;
+}
+.contact-form button {
+  background: coral;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contact-form button:hover {
+  background-color: #ff8243;
+}
+
+/* Modal */
+.meal-info-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.meal-info {
+  background-color: #fff7ed;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  background-color: #f7eedd;
+  text-align: center;
+  padding: 1rem;
+  border-top: 2px solid #ffe5c4;
+}
+footer a {
   color: coral;
 }
 
-.detailsOfMeal .recipesOfMeals p span{
-  color: #333;
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .search-bar {
+    width: 100%;
+  }
+  .search-bar input {
+    flex: 1;
+  }
 }
-
-.detailsOfMeal .recipesOfMeals .remove{
-  background-color: coral;
-  height: 40px;
-  width: 100px;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  color: black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-}
-
-.detailsOfMeal .recipesOfMeals .remove span{
-  font-size: 1rem;
-  font-weight: 540;
-}
-
-
-
-
-
-

@@ -3,28 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe Application</title>
+    <title>Recipe World 🍳</title>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="mobile-container">
-      <header>
-        <input type="text" id="search-Term" placeholder="Search recipes" />
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">Recipe<span>World</span></div>
+      <ul class="nav-links">
+        <li><a href="#random">Home</a></li>
+        <li><a href="#popular">Popular</a></li>
+        <li><a href="#fav">Favorites</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" id="search-term" placeholder="Search recipes..." />
         <button id="search">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-      </header>
-      <div class="fav-container">
-        <h3>Favorite Meals</h3>
-        <ul class="fav-meals" id="fev-meals"></ul>
       </div>
-      <div class="detailsOfMeal"></div>
-      <div class="meals" id="meals"></div>
+    </nav>
+
+    <!-- Random Recipe Section -->
+    <section id="random" class="section random-section">
+      <h2>🍝 Random Recipe</h2>
+      <div id="meals" class="meals"></div>
+    </section>
+
+    <!-- Popular Recipes -->
+    <section id="popular" class="section popular-section">
+      <h2>🔥 Popular Recipes</h2>
+      <div id="popular-meals" class="meals-grid"></div>
+    </section>
+
+    <!-- Favorite Section -->
+    <section id="fav" class="section fav-section">
+      <h2>❤️ Your Favorites</h2>
+      <ul id="fav-meals" class="fav-meals"></ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <h2>📞 Contact Us</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea rows="3" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Recipe Details Modal -->
+    <div class="meal-info-container" id="meal-info-container">
+      <div class="meal-info" id="meal-info">
+        <button id="close-popup" class="close-popup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="meal-details-content"></div>
+      </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 RecipeWorld. Made with ❤️ by Abhishek Goud</p>
+    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
