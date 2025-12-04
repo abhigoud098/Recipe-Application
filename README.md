@@ -1,4 +1,4 @@
-
+```
 🍳 Recipe Finder Web App
 
 A modern, responsive web app to discover, search, and save recipes — powered by the DummyJSON Recipes API.
@@ -45,3 +45,4 @@ Fallback Suggestions: If a search yields no results, buttons suggest external re
 Full-Stack Developer | Electronics Engineer | Tech Enthusiast
 
 📧 Email: abhigoud198484@gmail.com
+```
