@@ -102,7 +102,10 @@ function showMealPopup(meal) {
     <img src="${meal.image}" alt="${meal.name}" />
     <p><strong>Cooking Time:</strong> ${meal.cookTimeMinutes} min</p>
     <p><strong>Ingredients:</strong> ${meal.ingredients.join(", ")}</p>
-    <p><strong>Instructions:</strong> ${meal.instructions}</p>`;
+    <p><strong>Instructions:</strong> ${meal.instructions}</p>
+    <button id="close-popup" class="close-popup">Close</button>
+    <button id="delete-popup" class="close-popup">Delete</button>
+    `;   
 }
 
 document
