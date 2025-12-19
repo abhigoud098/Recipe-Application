@@ -8,11 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalContent = document.querySelector(".meal-details-content");
   const warningModal = document.getElementById("search-warning");
   const closeWarningBtn = document.getElementById("close-warning");
-  const closeBtn = document.getElementById("modal-close-btn");
 
   let allRecipes = [];
 
-  // 🚀 Start App
+  //Start App
   init();
 
   async function init() {
@@ -85,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ids = getMealLS();
 
     if (!ids.length) {
-      favoriteContainer.innerHTML = "<p>No favorites added yet ❤️</p>";
+      favoriteContainer.innerHTML = "<p>No favorites added yet...</p>";
       return;
     }
 
@@ -108,7 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function showMealPopup(meal) {
     modalContainer.style.display = "flex";
     modalContent.innerHTML = `
-  <h2>${meal.name}</h2>
+    <div class=popUp-hading-div><h2>${meal.name}</h2>
+     <button id="modal-close-btn" class="modal-close-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
   <img src="${meal.image}" />
   <p><strong>Cooking Time:</strong> ${meal.cookTimeMinutes} min</p>
   <p><strong>Ingredients:</strong> ${meal.ingredients.join(", ")}</p>
@@ -118,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
     Remove from Favorites
   </button>
 `;
+
+    const closeBtn = document.getElementById("modal-close-btn");
 
     closeBtn.addEventListener("click", () => {
       modalContainer.style.display = "none";
@@ -162,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     searchRecipes(term);
+    searchTerm.value = "";
   });
 
   // Close warning

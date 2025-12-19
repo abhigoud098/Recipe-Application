@@ -141,8 +141,7 @@ body {
   cursor: pointer;
   color: #999;
 }
-.fav-btn.active,
-.fav-btn:hover {
+.fav-btn.active {
   color: coral;
 }
 
@@ -280,6 +279,7 @@ body {
 }
 
 .meal-info {
+  position: relative;
   background: #ffffff;
   width: 92%;
   max-width: 520px;
@@ -417,7 +417,6 @@ body {
   background: rgba(0, 0, 0, 0.1);
   transform: scale(1.05);
 }
-
 
 /* Footer */
 footer {
