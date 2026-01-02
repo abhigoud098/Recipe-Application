@@ -24,7 +24,7 @@ JavaScript (ES6): Logic, DOM updates, API handling
 LocalStorage: Save favourite recipes locally
 DummyJSON API: Recipe data source
 
-🧠 How It Works (Step by Step)
+🧠 How It Works 
 Load Recipes: Fetches recipe data from DummyJSON API on page load.
 Display Random & Popular: Shows random recipe and the top 6 popular recipes automatically.
 Live Search: Typing in the search box filters recipes dynamically with fuzzy matching.
