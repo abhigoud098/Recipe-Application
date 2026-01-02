@@ -18,9 +18,9 @@ Detailed Recipe Popup 📋 – View cooking time, ingredients, and step-by-step 
 Responsive Design 📱 – Works seamlessly on mobile, tablet, and desktop.
 
 🛠️ Tech Stack
-Technology	Purpose
+Technology Purpose
 HTML5	Structure & layout
-CSS3	Styling, responsive design, UI effects
+CSS3 Styling, responsive design, UI effects
 JavaScript (ES6)	Logic, DOM updates, API handling
 LocalStorage: Save favourite recipes locally
 DummyJSON API	Recipe data source
@@ -31,7 +31,6 @@ Display Random & Popular: Shows random recipe and top 6 popular recipes automati
 Live Search: Typing in the search box filters recipes dynamically with fuzzy matching.
 Favorites Management: Users can save/remove recipes in LocalStorage, visible in the favorites section.
 Detailed Info: Clicking a recipe opens a popup modal with cooking time, ingredients, and instructions.
-Fallback Suggestions: If a search yields no results, buttons suggest external recipe sites.
 
 💡 Future Improvements
 🌙 Dark Mode toggle for night-friendly browsing
@@ -41,7 +40,7 @@ Fallback Suggestions: If a search yields no results, buttons suggest external re
 
 🧑‍💻 Author
 👋 Abhishek Goud
-Full-Stack Developer | Electronics Engineer | Tech Enthusiast
+Frontend Developer | Electronics Engineer | Tech Enthusiast
 
 📧 Email: abhigoud198484@gmail.com
 ```
