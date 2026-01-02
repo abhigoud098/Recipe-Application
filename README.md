@@ -18,19 +18,18 @@ Detailed Recipe Popup 📋 – View cooking time, ingredients, and step-by-step 
 Responsive Design 📱 – Works seamlessly on mobile, tablet, and desktop.
 
 🛠️ Tech Stack
-Technology Purpose
-HTML5	Structure & layout
-CSS3 Styling, responsive design, UI effects
-JavaScript (ES6)	Logic, DOM updates, API handling
+HTML5:Structure & layout
+CSS3 Styling: Responsive design, UI effects
+JavaScript (ES6): Logic, DOM updates, API handling
 LocalStorage: Save favourite recipes locally
-DummyJSON API	Recipe data source
+DummyJSON API: Recipe data source
 
 🧠 How It Works (Step by Step)
 Load Recipes: Fetches recipe data from DummyJSON API on page load.
-Display Random & Popular: Shows random recipe and top 6 popular recipes automatically.
+Display Random & Popular: Shows random recipe and the top 6 popular recipes automatically.
 Live Search: Typing in the search box filters recipes dynamically with fuzzy matching.
 Favorites Management: Users can save/remove recipes in LocalStorage, visible in the favorites section.
-Detailed Info: Clicking a recipe opens a popup modal with cooking time, ingredients, and instructions.
+Detailed Info: Clicking a recipe opens a pop-up modal with cooking time, ingredients, and instructions.
 
 💡 Future Improvements
 🌙 Dark Mode toggle for night-friendly browsing
